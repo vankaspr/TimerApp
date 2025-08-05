@@ -1,6 +1,7 @@
 [tool.poetry]
 package-mode = false
 include = ["src/styles/*.css"]
+include = ["src/fonts/*.ttf"]
 
 [tool.poetry.dependencies]
 python = "^3.12"
