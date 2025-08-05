@@ -1,4 +1,4 @@
-from PyQt5.QtCore import QTime
+from PyQt5.QtCore import QTime, Qt
 from PyQt5.QtWidgets import (
     QMainWindow,
     QWidget,
@@ -16,7 +16,7 @@ class TimerWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Timer-App")
-        self.setFixedSize(400, 300)
+        self.setFixedSize(500, 400)
 
         self.setStyleSheet(load_stylesheet())
 
@@ -29,16 +29,37 @@ class TimerWindow(QMainWindow):
 
     def init_ui(self):
         central_widget = QWidget()
-        layout = QVBoxLayout()
+        layout = QVBoxLayout(central_widget)
 
+        # text
+        text = QLabel("Set Time")
+        text.setAlignment(Qt.AlignCenter)
+        text.setStyleSheet(
+            """
+            QLabel {
+                font-size: 48px;
+                line-height: 58px;
+                color: #364C84;
+            }
+            """
+        )
         # input time
         self.time_edit = QTimeEdit()
         self.time_edit.setDisplayFormat("HH:mm:ss")
         self.time_edit.setTime(QTime(0, 1, 0))  # 00.01.00 default
+        layout.addWidget(self.time_edit)
 
         # Отображение времени
         self.time_label = QLabel("00:00:00")
-        self.time_label.setStyleSheet("font-size: 24px; font-weight: bold;")
+        self.time_label.setAlignment(
+            Qt.AlignCenter
+        )  # Центрирование текста внутри QLabel
+
+        label_container = QWidget()
+        label_layout = QHBoxLayout(label_container)
+        label_layout.addStretch()
+        label_layout.addWidget(self.time_label)
+        label_layout.addStretch()
 
         # Кнопки
         self.start_btn = QPushButton("start")
@@ -52,7 +73,9 @@ class TimerWindow(QMainWindow):
         btn_layout.addWidget(self.reset_btn)
 
         # Добавляем всё в layout
+        layout.addWidget(text)
         layout.addWidget(self.time_edit)
+        layout.addWidget(label_container)
         layout.addWidget(self.time_label)
         layout.addLayout(btn_layout)
         central_widget.setLayout(layout)
