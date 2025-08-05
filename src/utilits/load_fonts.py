@@ -1,5 +1,4 @@
-from PyQt5.QtGui import QFontDatabase, QFont
-import os
+from PyQt5.QtGui import QFontDatabase
 
 from pathlib import Path
 
