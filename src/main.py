@@ -1,14 +1,17 @@
 from PyQt5.QtCore import QTime
+from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QTimeEdit,
                              QLabel, QPushButton, QHBoxLayout)
 from utilits.timer import TimerLogic
 from utilits.load_stylesheet import load_stylesheet
+from utilits.load_fonts import load_pixelify_font
 
 class TimerWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Timer-App")
         self.setFixedSize(400, 300)
+
         self.setStyleSheet(load_stylesheet())
 
         # Экземпляр таймера
@@ -32,9 +35,10 @@ class TimerWindow(QMainWindow):
         self.time_label.setStyleSheet("font-size: 24px; font-weight: bold;")
 
         # Кнопки
-        self.start_btn = QPushButton("Старт")
-        self.pause_btn = QPushButton("Пауза")
-        self.reset_btn = QPushButton("Сброс")
+        self.start_btn = QPushButton("start")
+        self.pause_btn = QPushButton("pause")
+        self.reset_btn = QPushButton("reset")
+
 
         # Горизонтальный layout для кнопок
         btn_layout = QHBoxLayout()
@@ -90,7 +94,13 @@ class TimerWindow(QMainWindow):
 if __name__ == "__main__":
     import sys
     from PyQt5.QtWidgets import  QApplication
+
     app = QApplication(sys.argv)
+
+    font_family = load_pixelify_font()
+    if font_family:
+        app.setFont(QFont(font_family, 24))
+
     window = TimerWindow()
     window.show()
     sys.exit(app.exec_())
