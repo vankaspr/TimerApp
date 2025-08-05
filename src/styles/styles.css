@@ -6,11 +6,58 @@ QMainWindow {
 QPushButton {
     background: #364C84;
     border: 2px solid #B7DFF3;
-    border-radius: 24px;
+    border-radius: 20px;
     font-size: 24px;
     color: #E7F1A8;
-    width: 132px;
-    height: 52px;
+    max-width: 132px;
+    max-height: 52px;
+}
+
+/* TODO: доделать кнопки (при нажатии и наведении меняют цвет)*/
+
+QTimeEdit {
+    background: #FFFDF5;
+    border: 1px solid #364C84;
+    border-radius: 5px;
+
+    selection-background-color: #B7DFF3;
+    selection-color: white;
+
+}
+
+QTimeEdit::up-button, QTimeEdit::down-button {
+    width: 20px;
+    background-color: #B7DFF3;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+QTimeEdit::up-button:hover, QTimeEdit::down-button:hover {
+    background-color: #364C84;
+}
+
+QTimeEdit::up-button:pressed, QTimeEdit::down-button:pressed {
+    background-color: #364C84;
+}
+
+QTimeEdit::up-arrow {
+    image: url("media/icons/up_arrow.svg");
+    width: 20px;
+    height: 20px;
+}
+
+QTimeEdit::down-arrow {
+    image: url("media/icons/down_arrow.svg");
+    width: 20px;
+    height: 20px;
 }
 
 
+QLabel {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 96px;
+    line-height: 115px;
+    color: #364C84;
+
+}
