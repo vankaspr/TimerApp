@@ -2,12 +2,14 @@ from PyQt5.QtCore import QTime
 from PyQt5.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QTimeEdit,
                              QLabel, QPushButton, QHBoxLayout)
 from utilits.timer import TimerLogic
+from utilits.load_stylesheet import load_stylesheet
 
 class TimerWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Timer-App")
-        self.setFixedSize(300, 200)
+        self.setFixedSize(400, 300)
+        self.setStyleSheet(load_stylesheet())
 
         # Экземпляр таймера
         self.timer = TimerLogic()
@@ -51,6 +53,7 @@ class TimerWindow(QMainWindow):
         self.start_btn.clicked.connect(self.start_timer)
         self.pause_btn.clicked.connect(self.pause_timer)
         self.reset_btn.clicked.connect(self.reset_timer)
+
 
     def start_timer(self):
         """start the timer with the selected time """
