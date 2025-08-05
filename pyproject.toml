@@ -1,7 +1,9 @@
 [tool.poetry]
 package-mode = false
+include = ["src/styles/*.css"]
 
 [tool.poetry.dependencies]
 python = "^3.12"
 pyqt5 = "^5.15.11"
 sip = "^6.6.2"
+
