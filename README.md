@@ -33,7 +33,7 @@ TimerApp/
     ├── media/                  # Sounds, icons, ...
         ├── icons/
         ├── images/
-        ├── sounds
+        ├── sounds/
     ├── styles/                 # CSS styles
     ├── ui/                     # GUI (PyQt5)
         ├── window.py           # main window

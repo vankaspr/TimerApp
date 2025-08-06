@@ -1,4 +1,4 @@
-name: Build TimerApp (Windows + Linux)
+name: Build Python TimerApp
 
 on:
   push:
@@ -7,32 +7,42 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build-windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
-      - run: dotnet restore
-      - run: dotnet build -c Release --no-restore
-      - run: dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true
-      - uses: actions/upload-artifact@v4
-        with:
-          name: TimerApp-Windows
-          path: bin/Release/net8.0/win-x64/publish/
-
-  build-linux:
+  build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          dotnet-version: '8.0.x'
-      - run: dotnet restore
-      - run: dotnet build -c Release --no-restore
-      - run: dotnet publish -c Release -r linux-x64 --self-contained true /p:PublishSingleFile=true
-      - uses: actions/upload-artifact@v4
+          python-version: '3.13'
+
+      - name: Install Poetry
+        run: |
+          pip install poetry
+
+      - name: Install dependencies via Poetry
+        run: |
+         poetry install --no-root
+
+      - name: Build with PyInstaller
+        run: |
+          poetry run pyinstaller --onefile --name TimerApp \
+            --add-data "src/fonts;fonts" \
+            --add-data "src/media;media" \
+            --add-data "src/styles;styles" \
+            --add-data "libs/logger/config.py;libs/logger" \
+            --hidden-import PyQt5 \
+            --hidden-import PyQt5.QtWidgets \
+            --hidden-import PyQt5.QtCore \
+            --hidden-import PyQt5.QtGui \
+            --icon "src/media/icons/app_icon.ico" \
+            src/main.py
+
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
         with:
-          name: TimerApp-Linux
-          path: bin/Release/net8.0/linux-x64/publish/
+          name: TimerApp
+          path: dist/
