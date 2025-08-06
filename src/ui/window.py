@@ -8,7 +8,6 @@ from PyQt5.QtWidgets import (
     QPushButton,
     QHBoxLayout,
 )
-
 from utilits import load_stylesheet, TimerLogic
 
 
@@ -31,6 +30,9 @@ class TimerWindow(QMainWindow):
         central_widget = QWidget()
         layout = QVBoxLayout(central_widget)
 
+        layout.setContentsMargins(20, 40, 20, 20)
+        layout.setSpacing(20)
+
         # text
         text = QLabel("Set Time")
         text.setAlignment(Qt.AlignCenter)
@@ -43,6 +45,7 @@ class TimerWindow(QMainWindow):
             }
             """
         )
+
         # input time
         self.time_edit = QTimeEdit()
         self.time_edit.setDisplayFormat("HH:mm:ss")
@@ -59,7 +62,6 @@ class TimerWindow(QMainWindow):
         label_layout = QHBoxLayout(label_container)
         label_layout.addStretch()
         label_layout.addWidget(self.time_label)
-        label_layout.addStretch()
 
         # Кнопки
         self.start_btn = QPushButton("start")
@@ -75,7 +77,7 @@ class TimerWindow(QMainWindow):
         # Добавляем всё в layout
         layout.addWidget(text)
         layout.addWidget(self.time_edit)
-        layout.addWidget(label_container)
+
         layout.addWidget(self.time_label)
         layout.addLayout(btn_layout)
         central_widget.setLayout(layout)
@@ -112,6 +114,8 @@ class TimerWindow(QMainWindow):
 
     def on_timer_finished(self):
         """Timer ending actions"""
-        self.time_label.setText("00:00:00 ⏰")
+
+        # TODO: таймер заканчивается и - хз картинка или гика об окончании  - ???
+        self.time_label.setText("⏰")
         self.start_btn.setEnabled(True)
         self.pause_btn.setEnabled(False)
