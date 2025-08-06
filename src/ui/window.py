@@ -14,6 +14,7 @@ from utilits import (
     sound_wrapper,
     SoundPlayer,
     add_unified_sound_to_time_edit,
+    get_random_image,
 )
 
 
@@ -57,7 +58,7 @@ class TimerWindow(QMainWindow):
         # input time
         self.time_edit = QTimeEdit()
         self.time_edit.setDisplayFormat("HH:mm:ss")
-        self.time_edit.setTime(QTime(0, 1, 0))  # 00.01.00 default
+        self.time_edit.setTime(QTime(0, 0, 0))  # 00.01.00 default
         layout.addWidget(self.time_edit)
         add_unified_sound_to_time_edit(
             time_edit=self.time_edit,
@@ -109,6 +110,7 @@ class TimerWindow(QMainWindow):
 
     def start_timer(self):
         """start the timer with the selected time"""
+        # Отображение времени
         time = self.time_edit.time()
         self.timer.set_time(time.hour(), time.minute(), time.second())
         self.timer.start()
@@ -133,8 +135,11 @@ class TimerWindow(QMainWindow):
 
     def on_timer_finished(self):
         """Timer ending actions"""
-
-        # TODO: таймер заканчивается и - хз картинка или гика об окончании  - ???
-        self.time_label.setText("⏰")
         self.start_btn.setEnabled(True)
         self.pause_btn.setEnabled(False)
+        self.sound_player.play("end-timer")
+
+        if not hasattr(self.time_label, "original_text"):
+            self.time_label.original_text = "00:00:00"
+
+        get_random_image(self.time_label, "media/images")
