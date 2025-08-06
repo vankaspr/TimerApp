@@ -20,7 +20,7 @@ A simple timer application with GUI (PyQt5), sound notifications and customizabl
 - Setting the time **via the interface**.
 
 ## Project structure:
-
+###
 ```
 TimerApp/
 ├── libs/
