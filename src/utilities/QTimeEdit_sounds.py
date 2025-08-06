@@ -1,7 +1,7 @@
 from typing import Optional
 from PyQt5.QtCore import QEvent, QObject
 from PyQt5.QtWidgets import QTimeEdit
-from utilits import SoundPlayer
+from utilities import SoundPlayer
 
 
 class TimeEditSoundFilter(QObject):

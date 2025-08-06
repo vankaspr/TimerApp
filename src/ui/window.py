@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import (
     QPushButton,
     QHBoxLayout,
 )
-from utilits import (
+from utilities import (
     load_stylesheet,
     TimerLogic,
     sound_wrapper,

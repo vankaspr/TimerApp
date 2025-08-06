@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtGui import QFont
-from utilits import load_pixelify_font
+from utilities import load_pixelify_font
 from libs.logger import setup_logging, get_logger
 from ui import TimerWindow
 

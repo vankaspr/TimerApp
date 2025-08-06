@@ -1,5 +1,5 @@
 from typing import Callable
-from utilits import SoundPlayer
+from utilities import SoundPlayer
 
 
 def sound_wrapper(
