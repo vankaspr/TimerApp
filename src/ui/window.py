@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import (
     QPushButton,
     QHBoxLayout,
 )
-from utilits import load_stylesheet, TimerLogic
+from utilits import load_stylesheet, TimerLogic, sound_wrapper, SoundPlayer
 
 
 class TimerWindow(QMainWindow):
@@ -16,6 +16,8 @@ class TimerWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("Timer-App")
         self.setFixedSize(500, 400)
+
+        self.sound_player = SoundPlayer()
 
         self.setStyleSheet(load_stylesheet())
 
@@ -84,9 +86,15 @@ class TimerWindow(QMainWindow):
         self.setCentralWidget(central_widget)
 
         # Подключаем кнопки
-        self.start_btn.clicked.connect(self.start_timer)
-        self.pause_btn.clicked.connect(self.pause_timer)
-        self.reset_btn.clicked.connect(self.reset_timer)
+        self.start_btn.clicked.connect(
+            sound_wrapper(self.sound_player, "button-click", self.start_timer)
+        )
+        self.pause_btn.clicked.connect(
+            sound_wrapper(self.sound_player, "button-click", self.pause_timer)
+        )
+        self.reset_btn.clicked.connect(
+            sound_wrapper(self.sound_player, "button-click", self.reset_timer)
+        )
 
     def start_timer(self):
         """start the timer with the selected time"""
