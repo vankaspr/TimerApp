@@ -4,7 +4,6 @@ from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 
-
 def get_logs_dir():
     """Determines the correct folder for the logs"""
     if getattr(sys, "frozen", False):
@@ -24,14 +23,11 @@ def setup_logging():
 
     formatter = logging.Formatter(
         fmt="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S"
+        datefmt="%Y-%m-%d %H:%M:%S",
     )
 
     file_handler = RotatingFileHandler(
-        log_file,
-        maxBytes=5*1024*1024,
-        backupCount=3,
-        encoding="utf-8"
+        log_file, maxBytes=5 * 1024 * 1024, backupCount=3, encoding="utf-8"
     )
 
     file_handler.setFormatter(formatter)
@@ -52,11 +48,9 @@ def setup_logging():
 
     def handle_exceptions(exp_type, exc_value, exc_traceback):
         logger.critical(
-            "Unhandled exception",
-            exc_info=(exp_type, exc_value, exc_traceback)
+            "Unhandled exception", exc_info=(exp_type, exc_value, exc_traceback)
         )
 
     sys.excepthook = handle_exceptions
 
     logger.info("Logging system initialized")
-

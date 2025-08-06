@@ -31,6 +31,9 @@ TimerApp/
 ├── src/
     ├── fonts/                  # Pixelify Sans Family
     ├── media/                  # Sounds, icons, ...
+        ├── icons/
+        ├── images/
+        ├── sounds
     ├── styles/                 # CSS styles
     ├── ui/                     # GUI (PyQt5)
         ├── window.py           # main window

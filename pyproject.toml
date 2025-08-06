@@ -27,7 +27,7 @@ in-project = true
 path= ".env"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">=3.12,<3.15"
 pyqt5 = "^5.15.11"
 sip = "^6.6.2"
 black = "^25.1.0"

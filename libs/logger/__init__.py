@@ -1,4 +1,4 @@
-from .config import setup_logging, get_logs_dir
+from libs.logger.config import setup_logging, get_logs_dir
 from logging import getLogger
 
 __all__ = [
