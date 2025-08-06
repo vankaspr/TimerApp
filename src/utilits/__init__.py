@@ -1,8 +1,9 @@
 from .load_stylesheet import load_stylesheet
 from .load_fonts import load_pixelify_font
 from .timer import TimerLogic
-from .sounds import SoundPlayer
-from .sounds_play_with_smth import sound_wrapper
+from .play_sound import SoundPlayer
+from .button_sounds import sound_wrapper
+from .QTimeEdit_sounds import add_unified_sound_to_time_edit
 
 
 __all__ = [
@@ -11,4 +12,5 @@ __all__ = [
     "TimerLogic",
     "SoundPlayer",
     "sound_wrapper",
+    "add_unified_sound_to_time_edit",
 ]
