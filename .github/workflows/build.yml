@@ -22,9 +22,13 @@ jobs:
         run: |
           pip install poetry
 
-      - name: Install dependencies via Poetry
+      - name: Install project dependencies
         run: |
-         poetry install --no-root
+         poetry install
+
+      - name: Install PyInstaller via Poetry
+        run: |
+         poetry add pyinstaller --group dev
 
       - name: Build with PyInstaller
         run: |
@@ -37,7 +41,6 @@ jobs:
             --hidden-import PyQt5.QtWidgets \
             --hidden-import PyQt5.QtCore \
             --hidden-import PyQt5.QtGui \
-            --icon "src/media/icons/app_icon.ico" \
             src/main.py
 
 
