@@ -1,5 +1,4 @@
 from typing import Callable
-
 from utilits import SoundPlayer
 
 
