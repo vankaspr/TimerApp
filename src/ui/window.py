@@ -8,7 +8,13 @@ from PyQt5.QtWidgets import (
     QPushButton,
     QHBoxLayout,
 )
-from utilits import load_stylesheet, TimerLogic, sound_wrapper, SoundPlayer
+from utilits import (
+    load_stylesheet,
+    TimerLogic,
+    sound_wrapper,
+    SoundPlayer,
+    add_unified_sound_to_time_edit,
+)
 
 
 class TimerWindow(QMainWindow):
@@ -53,6 +59,11 @@ class TimerWindow(QMainWindow):
         self.time_edit.setDisplayFormat("HH:mm:ss")
         self.time_edit.setTime(QTime(0, 1, 0))  # 00.01.00 default
         layout.addWidget(self.time_edit)
+        add_unified_sound_to_time_edit(
+            time_edit=self.time_edit,
+            sound_player=self.sound_player,
+            sound_name="arrow-click",
+        )
 
         # Отображение времени
         self.time_label = QLabel("00:00:00")
