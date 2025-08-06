@@ -36,8 +36,6 @@ jobs:
             --add-data "src/fonts:fonts" \
             --add-data "src/media:media" \
             --add-data "src/styles:styles" \
-            --add-data "libs/logger/config.py:libs/logger" \
-            --add-data "libs/logger/config.py:libs/logger/config.py" \
             --hidden-import PyQt5 \
             --hidden-import PyQt5.QtWidgets \
             --hidden-import PyQt5.QtCore \

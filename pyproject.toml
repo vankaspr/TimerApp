@@ -12,8 +12,6 @@ dynamic = ["dependencies", "requires-python"]
 package-mode = false
 
 include = [
-    "logs/.gitkeep", # Сохраняет пустую папку
-    "libs/logger/**/*.py",
     "src/fonts/*.ttf",
     "src/styles/*.css"
 ]
