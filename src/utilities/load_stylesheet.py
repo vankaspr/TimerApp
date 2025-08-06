@@ -2,7 +2,7 @@ from pathlib import Path
 
 
 def load_stylesheet():
-    # Получаем абсолютный путь к директории со стилями
+
     style_dir = Path(__file__).parent.parent / "styles"
     css_file = style_dir / "styles.css"
 

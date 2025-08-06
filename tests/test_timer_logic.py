@@ -71,7 +71,7 @@ class TestTimerLogic(unittest.TestCase):
         spy = QSignalSpy(self.timer.time_update)
 
         self.timer.start()
-        # Эмулируем 3 срабатывания таймера
+
         for _ in range(3):
             self.timer.timer.timeout.emit()
 

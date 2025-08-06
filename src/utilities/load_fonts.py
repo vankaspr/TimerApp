@@ -4,22 +4,19 @@ from pathlib import Path
 
 
 def load_pixelify_font():
-    """Надёжная загрузка Pixelify Sans с диагностикой"""
+
     try:
-        # Получаем абсолютный путь (кросс-платформенно)
         font_path = Path(__file__).parent.parent / "fonts" / "PixelifySans.ttf"
-        font_path = font_path.resolve()  # Преобразуем в абсолютный путь
+        font_path = font_path.resolve()
 
         print(f"🔄 Пытаемся загрузить шрифт из: {font_path}")
 
-        # Проверка существования файла
         if not font_path.exists():
             available = list(font_path.parent.glob("*"))
             raise FileNotFoundError(
                 f"Файл шрифта не найден. Доступные файлы: {available}"
             )
 
-        # Загрузка шрифта
         font_id = QFontDatabase.addApplicationFont(str(font_path))
         if font_id == -1:
             raise RuntimeError(

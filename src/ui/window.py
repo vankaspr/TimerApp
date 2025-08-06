@@ -110,7 +110,6 @@ class TimerWindow(QMainWindow):
 
     def start_timer(self):
         """start the timer with the selected time"""
-        # Отображение времени
         time = self.time_edit.time()
         self.timer.set_time(time.hour(), time.minute(), time.second())
         self.timer.start()
