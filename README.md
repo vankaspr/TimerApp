@@ -38,7 +38,8 @@ TimerApp/
         ├── timer.py            
         ├── ...
     ├── main.py                 # Source code    
-...     
+├── tests/                      # Tests for timer and UI 
+...    
 └── pyproject.toml              # Конфигурация Poetry
 ```
 
