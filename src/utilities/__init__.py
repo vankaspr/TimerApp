@@ -5,6 +5,7 @@ from .play_sound import SoundPlayer
 from .button_sounds import sound_wrapper
 from .QTimeEdit_sounds import add_unified_sound_to_time_edit
 from .random_image_loader import get_random_image
+from .resource_path_helper import resource_path
 
 
 __all__ = [
@@ -15,4 +16,5 @@ __all__ = [
     "sound_wrapper",
     "add_unified_sound_to_time_edit",
     "get_random_image",
+    "resource_path",
 ]

@@ -2,7 +2,8 @@ import os
 import random
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QLabel, QSizePolicy
+from PyQt5.QtWidgets import QLabel
+from utilities.resource_path_helper import resource_path
 
 
 def get_random_image(label: QLabel, image_dir: str = "media/images") -> None:
@@ -13,39 +14,54 @@ def get_random_image(label: QLabel, image_dir: str = "media/images") -> None:
         original_text = label.text()
         original_stylesheet = label.styleSheet()
 
+        resolved_image_dir = resource_path(image_dir)
+
+        if not os.path.exists(resolved_image_dir):
+            raise FileNotFoundError(f"Image directory not found: {resolved_image_dir}")
+
         images = [
-            f for f in os.listdir(image_dir) if f.endswith((".png", ".jpg", "jpeg"))
+            os.path.join(resolved_image_dir, f)
+            for f in os.listdir(resolved_image_dir)
+            if f.lower().endswith((".png", ".jpg", ".jpeg"))
         ]
 
-        if images:
+        if not images:
+            raise FileNotFoundError("No images found in directory")
 
-            label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-            label.setAlignment(Qt.AlignCenter)
+        random_image_path = random.choice(images)
 
-            random_image = random.choice(images)
-            pixmap = QPixmap(os.path.join(image_dir, random_image))
+        # Загружаем изображение
+        pixmap = QPixmap(random_image_path)
+        if pixmap.isNull():
+            raise ValueError(f"Failed to load image: {random_image_path}")
 
-            max_size = label.parent().height() // 3
-            scaled_pixmap = pixmap.scaled(
-                max_size, max_size, Qt.KeepAspectRatio, Qt.SmoothTransformation
-            )
+        # Масштабируем
+        max_size = label.parent().height() // 3
+        scaled_pixmap = pixmap.scaled(
+            max_size, max_size, Qt.KeepAspectRatio, Qt.SmoothTransformation
+        )
 
-            label.setPixmap(scaled_pixmap)
+        # Устанавливаем изображение
+        label.setPixmap(scaled_pixmap)
 
-            QTimer.singleShot(
-                5000,
-                lambda: restore_label(
-                    label,
-                    original_size,
-                    original_policy,
-                    original_text,
-                    original_stylesheet,
-                ),
-            )
+        # Восстановление через 5 секунд
+        QTimer.singleShot(
+            5000,
+            lambda: restore_label(
+                label,
+                original_size,
+                original_policy,
+                original_text,
+                original_stylesheet,
+            ),
+        )
 
     except Exception as e:
         print(f"Image load error: {e}")
         label.setText("⏰")
+        # Для отладки можно вывести дополнительную информацию
+        print(f"Tried to load from: {image_dir}")
+        print(f"Resolved path: {resource_path(image_dir)}")
 
 
 def restore_label(
