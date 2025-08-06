@@ -1,3 +1,13 @@
+[project]
+name = "TimerApp"
+version = "0.1.0"
+authors = [
+    {name  = "Vanny", email = "msvankaspr@gmail.com"}
+]
+description = "A Qt-based timer application"
+readme = "README.md"
+dynamic = ["dependencies", "requires-python"]
+
 [tool.poetry]
 package-mode = false
 
@@ -7,6 +17,10 @@ include = [
     "src/fonts/*.ttf",
     "src/styles/*.css"
 ]
+
+[virtualenvs]
+in-project = true
+path= ".env"
 
 [tool.poetry.dependencies]
 python = "^3.12"
