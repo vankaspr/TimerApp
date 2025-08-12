@@ -30,21 +30,17 @@ def get_random_image(label: QLabel, image_dir: str = "media/images") -> None:
 
         random_image_path = random.choice(images)
 
-        # Загружаем изображение
         pixmap = QPixmap(random_image_path)
         if pixmap.isNull():
             raise ValueError(f"Failed to load image: {random_image_path}")
 
-        # Масштабируем
-        max_size = label.parent().height() // 3
+        max_size = label.parent().height() // 4
         scaled_pixmap = pixmap.scaled(
             max_size, max_size, Qt.KeepAspectRatio, Qt.SmoothTransformation
         )
 
-        # Устанавливаем изображение
         label.setPixmap(scaled_pixmap)
 
-        # Восстановление через 5 секунд
         QTimer.singleShot(
             5000,
             lambda: restore_label(
@@ -59,7 +55,7 @@ def get_random_image(label: QLabel, image_dir: str = "media/images") -> None:
     except Exception as e:
         print(f"Image load error: {e}")
         label.setText("⏰")
-        # Для отладки можно вывести дополнительную информацию
+
         print(f"Tried to load from: {image_dir}")
         print(f"Resolved path: {resource_path(image_dir)}")
 
